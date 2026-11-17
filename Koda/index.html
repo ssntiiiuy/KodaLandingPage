@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1F2937">
+  <meta name="description" content="Koda diseña y desarrolla software, sitios web y automatizaciones para hacer crecer buenas ideas.">
+  <title>Koda — Ideas que se convierten en software</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #ffffff;
+      --panel: #f7f9fc;
+      --panel-soft: #DCEAFF;
+      --text: #1F2937;
+      --muted: #526174;
+      --line: rgba(31, 41, 55, .14);
+      --blue: #547AA5;
+      --violet: #DCEAFF;
+      --radius: 22px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .brand img {
+      display: block;
+      width: 126px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .nav .nav-cta {
+      color: #ffffff;
+      background: #1F2937;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 750;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 50px;
+      min-height: 540px;
+      padding: 58px 0 76px;
+    }
+
+    .hero::before {
+      position: absolute;
+      z-index: -1;
+      top: 45px;
+      right: 1%;
+      width: 450px;
+      height: 400px;
+      content: "";
+      background: radial-gradient(ellipse, rgba(220, 234, 255, .9), transparent 68%);
+      filter: blur(8px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 19px;
+      color: var(--blue);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      content: "";
+      background: var(--blue);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 650px;
+      margin-bottom: 22px;
+      font-size: clamp(3rem, 6.2vw, 5.4rem);
+      line-height: .99;
+      letter-spacing: -.045em;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.12rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 31px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 19px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-weight: 750;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(31, 41, 55, .35);
+    }
+
+    .button.primary {
+      color: #ffffff;
+      background: #1F2937;
+      border-color: #1F2937;
+    }
+
+    .button.primary:hover {
+      background: #34445b;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 350px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      border: 1px solid rgba(31, 41, 55, .22);
+      border-radius: 50%;
+      transform: rotate(-24deg) scaleY(.68);
+    }
+
+    .orbit::before,
+    .orbit::after {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      content: "";
+      background: var(--blue);
+    }
+
+    .orbit::before {
+      top: 19%;
+      left: 16%;
+    }
+
+    .orbit::after {
+      right: 13%;
+      bottom: 14%;
+      width: 7px;
+      height: 7px;
+      background: #C5C3C3;
+    }
+
+    .code-card {
+      position: relative;
+      width: min(340px, 90%);
+      padding: 21px;
+      border: 1px solid #1F2937;
+      border-radius: 18px;
+      background: #1F2937;
+      box-shadow: 0 25px 55px rgba(31, 41, 55, .18);
+      transform: rotate(3deg);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+      padding-bottom: 19px;
+      border-bottom: 1px solid rgba(220, 234, 255, .24);
+    }
+
+    .window-dots i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #C5C3C3;
+    }
+
+    .window-dots i:first-child,
+    .window-dots i:nth-child(2),
+    .window-dots i:nth-child(3) {
+      background: #DCEAFF;
+    }
+
+    .code-lines {
+      display: grid;
+      gap: 13px;
+      padding-top: 20px;
+      font: 500 .82rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace;
+      color: #DCEAFF;
+    }
+
+    .code-line {
+      display: flex;
+      gap: 12px;
+    }
+
+    .ln {
+      color: #C5C3C3;
+    }
+
+    .code-key {
+      color: #C5C3C3;
+    }
+
+    .code-string {
+      color: #DCEAFF;
+    }
+
+    .code-comment {
+      color: #C5C3C3;
+    }
+
+    .float-note {
+      position: absolute;
+      right: 0;
+      bottom: 22px;
+      padding: 12px 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      color: var(--muted);
+      background: #ffffff;
+      font-size: .8rem;
+      box-shadow: 0 12px 35px rgba(31, 41, 55, .12);
+    }
+
+    .float-note strong {
+      display: block;
+      color: var(--text);
+      font-size: .95rem;
+    }
+
+    .ribbon {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px 44px;
+      padding: 20px;
+      border-block: 1px solid var(--line);
+      color: #1F2937;
+      font-size: .84rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .ribbon span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ribbon span::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      content: "";
+      background: #547AA5;
+    }
+
+    section {
+      scroll-margin-top: 30px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      max-width: 690px;
+      margin-bottom: 38px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 14px;
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      line-height: 1.06;
+      letter-spacing: -.05em;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+    }
+
+    .about-copy .lead {
+      color: var(--text);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .photo-frame {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      border: 1px dashed #C5C3C3;
+      border-radius: var(--radius);
+      background: radial-gradient(circle at 75% 20%, rgba(220, 234, 255, .9), transparent 45%), #f7f9fc;
+    }
+
+    .photo-frame::before,
+    .photo-frame::after {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      content: "";
+      border: 1px solid rgba(31, 41, 55, .12);
+      border-radius: 50%;
+    }
+
+    .photo-frame::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .photo-placeholder {
+      position: relative;
+      z-index: 1;
+      max-width: 230px;
+      padding: 24px;
+      border: 1px solid rgba(31, 41, 55, .12);
+      border-radius: 18px;
+      text-align: center;
+      background: rgba(255, 255, 255, .92);
+    }
+
+    .photo-placeholder .icon {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--blue);
+      font-size: 1.7rem;
+    }
+
+    .photo-placeholder strong {
+      display: block;
+    }
+
+    .photo-placeholder small {
+      color: var(--muted);
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .service {
+      min-height: 220px;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #f7f9fc;
+    }
+
+    .service-icon {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      margin-bottom: 25px;
+      border-radius: 13px;
+      color: #1F2937;
+      background: #DCEAFF;
+      font-size: 1.25rem;
+    }
+
+    .service:nth-child(2) .service-icon {
+      color: #1F2937;
+      background: #C5C3C3;
+    }
+
+    .service h3 {
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+    }
+
+    .service p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .team-photo {
+      min-height: 250px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border: 1px dashed #C5C3C3;
+      border-radius: 18px;
+      text-align: center;
+      color: var(--muted);
+      background: #f7f9fc;
+    }
+
+    .team-photo:nth-child(2) {
+      background: #DCEAFF;
+    }
+
+    .team-photo:nth-child(3) {
+      background: #f0f1f2;
+    }
+
+    .team-photo span {
+      display: block;
+      color: #547AA5;
+      font-size: 1.5rem;
+    }
+
+    .contact {
+      padding: 76px 0 90px;
+      background: linear-gradient(180deg, #ffffff, #DCEAFF);
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 50px;
+      padding: clamp(24px, 5vw, 55px);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: var(--panel);
+    }
+
+    .contact-card h2 {
+      margin-bottom: 15px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.03;
+      letter-spacing: -.05em;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+    }
+
+    .contact-email {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: #1F2937;
+      font-size: .86rem;
+      font-weight: 650;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #C5C3C3;
+      border-radius: 11px;
+      outline: none;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: #547AA5;
+      box-shadow: 0 0 0 3px rgba(84, 122, 165, .14);
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-note {
+      grid-column: 1 / -1;
+      margin: -2px 0 0;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .form-submit {
+      grid-column: 1 / -1;
+      justify-self: start;
+      cursor: pointer;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 0 32px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .83rem;
+    }
+
+    .contact-brand img {
+      display: block;
+      width: 138px;
+      height: auto;
+      margin-bottom: 26px;
+      border-radius: 10px;
+    }
+
+    .footer .brand img {
+      width: 126px;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-top: 54px;
+      }
+
+      .hero-art {
+        min-height: 320px;
+      }
+
+      .about-grid,
+      .contact-card {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .services,
+      .team-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .service:last-child,
+      .team-photo:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .contact-card {
+        padding: 28px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .topbar {
+        padding: 16px 0;
+      }
+
+      .nav {
+        gap: 14px;
+        font-size: .82rem;
+      }
+
+      .nav a:not(.nav-cta) {
+        display: none;
+      }
+
+      .nav .nav-cta {
+        padding: 9px 12px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 55px 0 50px;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 14vw, 4.2rem);
+      }
+
+      .hero-copy {
+        font-size: 1rem;
+      }
+
+      .hero-art {
+        min-height: 290px;
+      }
+
+      .orbit {
+        width: 270px;
+        height: 270px;
+      }
+
+      .float-note {
+        right: 0;
+        bottom: 4px;
+      }
+
+      .ribbon {
+        justify-content: flex-start;
+        gap: 12px 22px;
+        font-size: .76rem;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .photo-frame {
+        min-height: 280px;
+      }
+
+      .services,
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service:last-child,
+      .team-photo:last-child {
+        grid-column: auto;
+      }
+
+      .team-photo {
+        min-height: 210px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full,
+      .form-note,
+      .form-submit {
+        grid-column: auto;
+      }
+
+      .form-submit {
+        width: 100%;
+      }
+
+      .footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+
+    .foto-equipo {
+      display: block;
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+    }
+
+    .team-photo {
+      display: block;
+      overflow: hidden;
+      padding: 0;
+      border-radius: 18px;
+    }
+
+    .team-photo img {
+      display: block;
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .team-photo p {
+      margin: 0;
+      padding: 12px;
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#inicio" aria-label="Koda, inicio"><img src="koda-logo-azul.png" alt="Koda" width="230" height="124"></a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="#servicios">Qué hacemos</a>
+      <a href="#nosotros">Nosotros</a>
+      <a class="nav-cta" href="#contacto">Hablemos <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="inicio">
+      <div>
+        <p class="eyebrow">Estudio de software · Uruguay</p>
+        <h1>Ideas que se convierten en <span>software.</span></h1>
+        <p class="hero-copy">Creamos sitios web, aplicaciones y automatizaciones para que buenas ideas lleguen más lejos.</p>
+        <div class="actions">
+          <a class="button primary" href="#contacto">Contanos tu idea <span aria-hidden="true">↗</span></a>
+          <a class="button" href="#nosotros">Conocé Koda</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="code-card">
+          <div class="window-dots"><i></i><i></i><i></i></div>
+          <div class="code-lines">
+            <div class="code-line"><span class="ln">01</span><span><span class="code-key">const</span> idea = <span class="code-string">"tu proyecto"</span>;</span></div>
+            <div class="code-line"><span class="ln">02</span><span><span class="code-key">const</span> equipo = <span class="code-string">"Koda"</span>;</span></div>
+            <div class="code-line"><span class="ln">03</span><span class="code-comment">// lo hacemos realidad</span></div>
+            <div class="code-line"><span class="ln">04</span><span>idea.<span class="code-key">construir</span>(equipo);</span></div>
+          </div>
+        </div>
+        <div class="float-note"><strong>De la idea al producto</strong>Diseño · Desarrollo · Lanzamiento</div>
+      </div>
+    </section>
+
+    <div class="wrap ribbon" aria-label="Servicios de Koda">
+      <span>Desarrollo web</span><span>Aplicaciones a medida</span><span>Automatización</span><span>Integraciones</span>
+    </div>
+
+    <section class="wrap section" id="nosotros">
+      <div class="about-grid">
+        <div class="about-copy">
+          <p class="eyebrow">Quiénes somos</p>
+          <h2>Un equipo cercano para construir lo que sigue.</h2>
+          <p class="lead">En Koda unimos tecnología, diseño y buenas preguntas para resolver problemas reales.</p>
+          <p>Trabajamos junto a cada cliente desde la primera idea hasta una solución lista para usar. Sin complicar lo simple, y con foco en que cada proyecto tenga un propósito claro.</p>
+          <a class="button" href="#contacto">Conversemos <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="photo-frame">
+          <img class="foto-equipo" src="fotos/equipo.jfif" alt="El equipo de Koda">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Qué hacemos</p>
+          <h2>La tecnología adecuada para tu próximo paso.</h2>
+          <p>Soluciones digitales pensadas para personas, equipos y negocios que quieren avanzar.</p>
+        </div>
+        <div class="services">
+          <article class="service"><span class="service-icon" aria-hidden="true">⌘</span>
+            <h3>Desarrollo web</h3>
+            <p>Sitios y plataformas rápidos, claros y preparados para crecer con tu negocio.</p>
+          </article>
+          <article class="service"><span class="service-icon" aria-hidden="true">✳</span>
+            <h3>Software a medida</h3>
+            <p>Herramientas y aplicaciones diseñadas alrededor de cómo trabaja tu equipo.</p>
+          </article>
+          <article class="service"><span class="service-icon" aria-hidden="true">↗</span>
+            <h3>Automatización</h3>
+            <p>Conectamos tareas y sistemas para ahorrar tiempo y reducir trabajo repetido.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" aria-labelledby="equipo-titulo">
+      <div class="section-head">
+        <p class="eyebrow">Las personas detrás de Koda</p>
+        <h2 id="equipo-titulo">Las mejores ideas se construyen en equipo.</h2>
+        <p>Estos espacios quedan listos para sumar fotos, nombres y roles de ustedes.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-photo">
+          <img src="fotos/lucas.jpeg" alt="Nombre de la persona 1">
+          <p>Lucas Barboza · Arquitecto de Software</p>
+        </div>
+
+        <div class="team-photo">
+          <img src="fotos/santi.jpeg" alt="Nombre de la persona 2">
+          <p>Santiago Pintos · Desarrollador</p>
+        </div>
+
+        <div class="team-photo">
+          <img src="fotos/emi.jpeg" alt="Nombre de la persona 3">
+          <p>Emiliano Díaz · CEO</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="wrap contact-card">
+        <div>
+          <a class="contact-brand" href="#inicio" aria-label="Koda"><img src="koda-logo-claro.png" alt="Koda" width="230" height="124"></a>
+          <p class="eyebrow">Tu proyecto empieza acá</p>
+          <h2>¿Qué te gustaría crear?</h2>
+          <p>Contanos un poco de tu idea. Te respondemos para entender qué necesitás y pensar juntos el próximo paso.</p>
+          <a class="contact-email" href="mailto:santicharruita19@gmail.com">santicharruita19@gmail.com</a>
+        </div>
+        <form id="contactForm">
+          <div class="form-grid">
+            <div class="field"><label for="nombre">Tu nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+            <div class="field"><label for="correo">Tu correo</label><input id="correo" name="correo" type="email" autocomplete="email" required></div>
+            <div class="field full"><label for="empresa">Empresa o proyecto <span style="color:var(--muted);font-weight:400">(opcional)</span></label><input id="empresa" name="empresa" autocomplete="organization"></div>
+            <div class="field full"><label for="mensaje">¿En qué podemos ayudarte?</label><textarea id="mensaje" name="mensaje" required></textarea></div>
+            <p class="form-note">Al tocar el botón se abrirá tu correo con el mensaje listo para enviar.</p>
+            <button class="button primary form-submit" type="submit">Preparar consulta <span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <a class="brand" href="#inicio" aria-label="Koda, volver al inicio"><img src="koda-logo-azul.png" alt="Koda" width="230" height="124"></a>
+    <span>Software con propósito. Hecho en Uruguay.</span>
+    <span>© <span id="year"></span> Koda</span>
+  </footer>
+
+  <script>
+    const CONTACT_EMAIL = 'santicharruita19@gmail.com';
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('contactForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const subject = `Consulta para Koda — ${data.get('nombre')}`;
+      const body = [
+        `Nombre: ${data.get('nombre')}`,
+        `Correo: ${data.get('correo')}`,
+        `Empresa o proyecto: ${data.get('empresa') || 'No indicado'}`,
+        '',
+        'Mensaje:',
+        data.get('mensaje')
+      ].join('\n');
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  </script>
+</body>
+</html>
